@@ -25,7 +25,7 @@ const QueryForm: React.FC<QueryFormProps> = ({ onSubmit }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className="w-full p-2 border rounded mb-4"
-        placeholder="e.g., Who are the best-rated dishwasher repair technicians in San Francisco?"
+        placeholder="e.g., Who are the best-rated dishwasher repair technicians in San Francisco, CA USA and what do they charge? How do I book?"
       />
       <button
         type="submit"
