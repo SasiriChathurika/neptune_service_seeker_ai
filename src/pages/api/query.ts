@@ -48,23 +48,24 @@ async function scrapeSources(query: string) {
 
   // Use Cheerio to parse the HTML and extract data.
   const $ = cheerio.load(dummyHTML);
+  const listings: { name: string; rating: number; price: number; booking: string }[] = [];
 
-  // Explicitly define the type for the results array.
-  const results: Array<{ name: string; rating: number; price: string; booking: string }> = [];
-
-  $('.listing').each((_, element) => {
+  $('.listing').each((_: unknown, element: any) => {
     const name = $(element).find('.name').text();
     const rating = parseFloat($(element).find('.rating').text());
-    const price = $(element).find('.price').text();
-    const booking = $(element).find('.booking a').attr('href');
+    const price = parseFloat($(element).find('.price').text().replace('$', ''));
+    const booking = $(element).find('.booking a').attr('href') || '';
 
-    // Ensure all properties are non-nullable before pushing to the results array.
-    if (name && rating && price && booking) {
-      results.push({ name, rating, price, booking });
-    }
+    listings.push({ name, rating, price, booking });
   });
 
-  return results;
+  return listings;
+}
+
+function calculateNeptuneScore(listing: { rating: number; price: number }): number {
+  const ratingScore = listing.rating * 20;
+  const priceScore = 100 - listing.price;
+  return Math.round(ratingScore + priceScore);
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -72,13 +73,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { query } = req.body;
 
     try {
-      const results = await scrapeSources(query);
-      res.status(200).json({ results });
+      const scrapedResults = await scrapeSources(query);
+
+      const resultsWithScores = scrapedResults.map((listing) => ({
+        ...listing,
+        neptuneScore: calculateNeptuneScore(listing),
+      }));
+
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4.1-nano-2025-04-14',
+        messages: [
+          { role: 'system', content: 'Enhance the following scraped results with additional insights.' },
+          { role: 'user', content: JSON.stringify(resultsWithScores) },
+        ],
+        max_tokens: 600,
+      });
+
+      let enhancedResults;
+      try {
+        enhancedResults = JSON.parse(completion.choices[0].message.content || '{}');
+      } catch (parseError) {
+        console.warn('Response is not valid JSON, returning plain text:', completion.choices[0].message.content);
+        enhancedResults = [{ text: completion.choices[0].message.content || 'No content available' }];
+      }
+
+      res.status(200).json({ results: enhancedResults.length > 0 ? enhancedResults : resultsWithScores });
     } catch (error) {
       console.error('Error processing query:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ message: 'Failed to process query.' });
     }
   } else {
-    res.status(405).json({ error: 'Method Not Allowed' });
+    res.status(405).json({ message: 'Method not allowed' });
   }
 }
