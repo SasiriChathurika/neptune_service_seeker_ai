@@ -95,33 +95,35 @@ Neptune Seek is built with a modern and robust technology stack:
 | Cheerio         | HTML parsing and data extraction                |
 -->
 
-## 🏗️ Project Structure
+## 🏗️ Project Blueprint
 
-A brief overview of the key directories and files:
-neptune-seek/
-├── public/ # Static assets
-├── src/
-│ ├── app/
-│ │ └── page.tsx # Main application page (layout, logic)
-│ ├── components/ # Reusable UI components
-│ │ ├── QueryForm.tsx # User query input form
-│ │ └── ResultsDisplay.tsx # Component for displaying search results
-│ ├── pages/
-│ │ └── api/
-│ │ └── query.ts # API endpoint for query handling & OpenAI integration
-│ ├── lib/ # Utility functions, helper modules
-│ └── styles/ # Global styles, Tailwind config
-├── .env.local # Environment variables (ignored by Git)
-├── next.config.js # Next.js configuration
-├── package.json # Project dependencies and scripts
-└── tsconfig.json # TypeScript configuration
+Explore the architecture of Neptune Seek. Key directories and files are outlined below:
+
+| Path                        | Type   | Description                                           |
+| --------------------------- | ------ | ----------------------------------------------------- |
+| `public/`                   | 📁 Dir | Static assets (images, fonts, etc.)                   |
+| `src/`                      | 📁 Dir | Main application source code                          |
+| `src/app/page.tsx`          | 📄 File | ✨ **Main application page** (layout & core logic)      |
+| `src/components/`           | 📁 Dir | Reusable UI components                                |
+| `src/components/QueryForm.tsx`| 📄 File | 🔍 User query input component                         |
+| `src/components/ResultsDisplay.tsx`| 📄 File | 📊 Component for displaying search results        |
+| `src/pages/api/query.ts`    | 📄 File | 🔗 **API endpoint** for query handling & OpenAI       |
+| `src/lib/`                  | 📁 Dir | Utility functions, helpers, custom hooks              |
+| `src/styles/`               | 📁 Dir | Global styles, Tailwind CSS configuration             |
+| `.env.local`                | 📄 File | Local environment variables (API keys, Git ignored)   |
+| `next.config.js`            | 📄 File | Next.js specific configurations                       |
+| `package.json`              | 📄 File | Project metadata, dependencies, and scripts         |
+| `tsconfig.json`             | 📄 File | TypeScript compiler options                           |
+
+<br>
+
 <details>
-<summary><strong>More details on project files:</strong></summary>
+<summary><strong> Dive Deeper: Core Component Logic </strong></summary>
 
--   `src/app/page.tsx`: The primary entry point and layout for the application. Contains the main logic for query submission and result display.
--   `src/components/QueryForm.tsx`: A dedicated React component managing the user's input field and submission.
--   `src/components/ResultsDisplay.tsx`: Responsible for rendering the fetched and synthesized search results, including Neptune Scores.
--   `src/pages/api/query.ts`: The backend API route that receives user queries, interacts with external search sources (via Cheerio if scraping), and leverages the OpenAI API for synthesis.
+*   📄 **`src/app/page.tsx`**: As the primary entry point for the user interface, this file manages the overall page structure, state for search queries and their corresponding results, and integrates essential child components like the `QueryForm` and `ResultsDisplay`.
+*   📄 **`src/components/QueryForm.tsx`**: This dedicated component encapsulates the search input field and the logic for capturing user input and initiating the search request to the backend.
+*   📄 **`src/components/ResultsDisplay.tsx`**: Responsible for rendering the processed search results returned from the API. It dynamically displays the synthesized information, including any special formatting or the unique Neptune Scores.
+*   📄 **`src/pages/api/query.ts`**: This is the crucial server-side API endpoint. It handles incoming search requests, orchestrates data fetching (potentially using tools like Cheerio for web scraping), communicates with the OpenAI API for result synthesis, and sends the processed data back to the client.
 </details>
 
 ## 🤝 Contributing
