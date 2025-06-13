@@ -1,3 +1,7 @@
+// This file defines the root layout for the application.
+// It includes global styles and font configurations.
+
+// Import metadata and font configurations.
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -23,6 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Render the HTML structure with global fonts and styles applied.
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
