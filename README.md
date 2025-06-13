@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Neptune Seek
 
-## Getting Started
+Neptune Seek is a modern, sleek, AI-powered search web application built with Next.js. It allows users to submit natural language queries and receive synthesized search results from multiple sources, enhanced by OpenAI's GPT-4 model.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Natural Language Query:** Users can input queries in plain English.
+- **AI Integration:** Utilizes OpenAI's GPT-4 for intelligent result synthesis.
+- **Responsive Design:** Modern, dark-themed UI optimized for all screen sizes.
+- **Dynamic Results:** Fetches real-time search results from multiple sources.
+- **Neptune Score:** Calculates a unique score for each listing based on rating and price.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/neptune-seek.git
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Navigate to the project directory:
+   ```bash
+   cd neptune-seek
+   ```
 
-## Learn More
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Set up environment variables:
+   - Create a `.env.local` file in the root directory.
+   - Add your OpenAI API key:
+     ```env
+     OPENAI_API_KEY=your_openai_api_key_here
+     ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+1. Open the application in your browser at `http://localhost:3000`.
+2. Enter a query in the input box (e.g., "Who are the best-rated dishwasher repair technicians in San Francisco?").
+3. View the search results with enhanced insights and Neptune Scores.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js:** Framework for building server-rendered React applications.
+- **React:** Library for building user interfaces.
+- **Tailwind CSS:** Utility-first CSS framework for styling.
+- **OpenAI API:** Integration for AI-powered result enhancement.
+- **Cheerio:** Library for parsing and extracting data from HTML.
+
+## Project Structure
+
+- `src/app/page.tsx`: Main page layout and logic.
+- `src/components/QueryForm.tsx`: Component for user query input.
+- `src/components/ResultsDisplay.tsx`: Component for displaying search results.
+- `src/pages/api/query.ts`: API endpoint for handling queries and integrating OpenAI.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgments
+
+- [OpenAI](https://openai.com/) for their powerful GPT-4 model.
+- [Next.js](https://nextjs.org/) for the amazing framework.
+- [Tailwind CSS](https://tailwindcss.com/) for the styling utilities.
