@@ -148,12 +148,12 @@ Permission is hereby granted, free of charge, to any person obtaining a copy
 ... (rest of MIT license)
 ## 🙏 Acknowledgments
 
-We extend our gratitude to the following projects and communities:
+I extend my gratitude to the following projects and communities:
 
 *   [OpenAI](https://openai.com/) for their groundbreaking GPT-4 model.
 *   The [Next.js](https://nextjs.org/) team for an incredible development framework.
 *   [Tailwind CSS](https://tailwindcss.com/) for revolutionizing CSS development.
-*   All contributors and users of this project.
+*   All users of this project.
 
 ---
 
